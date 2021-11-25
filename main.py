@@ -25,13 +25,16 @@ if __name__ == '__main__':
     (grabbed, frame) = vs.read()
     resize_width = 3840
     frame = imutils.resize(frame, width=resize_width)
+    cv2.imwrite('first_frame.jpg', frame)
     (h, w) = frame.shape[:2]
 
     fps = FPS().start()
     yolo = yolo_obj.yolo_object_detection('person')
+    detection_intensity = 1
     bboxes = []
-    bboxes = yolo.run_detection(frame)
+    bboxes = yolo.run_detection(frame, detection_intensity)
     #print(bboxes)
+    #print(len(bboxes))
 
     # bbox[x y w h]
     for i,box in enumerate(bboxes):
