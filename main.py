@@ -31,6 +31,18 @@ if __name__ == '__main__':
     yolo = yolo_obj.yolo_object_detection('person')
     bboxes = []
     bboxes = yolo.run_detection(frame)
+    #print(bboxes)
+
+    # bbox[x y w h]
+    for i,box in enumerate(bboxes):
+        if box[0] + box[2] >= w:
+            dx = w - box[0]
+            box[2] = dx
+        if box[1] + box[3] >= h:
+            dy = h - box[1]
+            box[3] = dy
+
+
     cv2.imwrite('output.jpg', frame)
 
     fps.stop()
